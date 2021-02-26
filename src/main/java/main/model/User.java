@@ -3,6 +3,7 @@ package main.model;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -29,7 +30,14 @@ public class User {
     private Set<Post> posts = new HashSet<>();
     @OneToMany(mappedBy = "id")
     private Set<PostComment> postComments = new HashSet<>();
-
+    @ManyToMany()
+    @JoinTable(name = "post_votes",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "post_id")})
+    private List<Post> postVotes;
+    public List<Post> getPostVotes() {
+        return postVotes;
+    }
     public Set<PostComment> getPostComments() {
         return postComments;
     }
