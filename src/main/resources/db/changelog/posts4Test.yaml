@@ -1,0 +1,90 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1614582803160-31
+      author: your_liquibase_username (generated)
+      changes:
+        - insert:
+            tableName: posts
+            columns:
+              - column:
+                  name: is_active
+                  type: BIT(1)
+                  valueBoolean: "true"
+              - column:
+                  name: moderation_status
+                  value: "ACCEPTED"
+              - column:
+                  name: moderator_id
+                  type: INT
+                  valueComputed: 1
+              - column:
+                  name: user_id
+                  value: 2
+              - column:
+                  name: time
+                  value: "02.03.2021"
+              - column:
+                  name: title
+                  value: "Post"
+              - column:
+                  name: text
+                  value: "Some text1"
+              - column:
+                  name: view_count
+                  value: 0
+        - insert:
+            tableName: posts
+            columns:
+              - column:
+                  name: is_active
+                  type: BIT(1)
+                  valueBoolean: "false"
+              - column:
+                  name: moderation_status
+                  value: "NEW"
+              - column:
+                  name: moderator_id
+                  value: null
+              - column:
+                  name: user_id
+                  value: 3
+              - column:
+                  name: time
+                  value: "02.03.2021"
+              - column:
+                  name: title
+                  value: "Post"
+              - column:
+                  name: text
+                  value: "Some text2"
+              - column:
+                  name: view_count
+                  value: 0
+        - insert:
+            tableName: posts
+            columns:
+              - column:
+                  name: is_active
+                  type: BIT(1)
+                  valueBoolean: "false"
+              - column:
+                  name: moderation_status
+                  value: "NEW"
+              - column:
+                  name: moderator_id
+                  value: null
+              - column:
+                  name: user_id
+                  value: 2
+              - column:
+                  name: time
+                  value: "02.03.2021"
+              - column:
+                  name: title
+                  value: "Post"
+              - column:
+                  name: text
+                  value: "Some text3"
+              - column:
+                  name: view_count
+                  value: 0

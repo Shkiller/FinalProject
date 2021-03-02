@@ -1,0 +1,41 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1614582803160-34
+      author: your_liquibase_username (generated)
+      changes:
+        - insert:
+            tableName: tag2post
+            columns:
+              - column:
+                  name: post_id
+                  value: 1
+              - column:
+                  name: tag_id
+                  value: 1
+        - insert:
+            tableName: tag2post
+            columns:
+              - column:
+                  name: post_id
+                  value: 1
+              - column:
+                  name: tag_id
+                  value: 2
+        - insert:
+            tableName: tag2post
+            columns:
+              - column:
+                  name: post_id
+                  value: 2
+              - column:
+                  name: tag_id
+                  value: 1
+        - insert:
+            tableName: tag2post
+            columns:
+              - column:
+                  name: post_id
+                  value: 1
+              - column:
+                  name: tag_id
+                  value: 3

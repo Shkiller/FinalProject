@@ -1,6 +1,12 @@
 package main.model;
 
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 
 @Entity
@@ -11,9 +17,9 @@ public class CaptchaCode {
     private int id;
     @Column(nullable = false)
     private Date time;
-    @Column(nullable = false,columnDefinition = "TINYTEXT")
+    @Column(nullable = false, columnDefinition = "TINYTEXT")
     private String code;
-    @Column(nullable = false,columnDefinition = "TINYTEXT")
+    @Column(nullable = false, columnDefinition = "TINYTEXT")
     private String secretCode;
 
     public int getId() {
@@ -47,4 +53,5 @@ public class CaptchaCode {
     public void setSecretCode(String secretCode) {
         this.secretCode = secretCode;
     }
+
 }

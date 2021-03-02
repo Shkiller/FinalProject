@@ -1,0 +1,77 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1614582803160-35
+      author: your_liquibase_username (generated)
+      changes:
+        - insert:
+            tableName: post_comments
+            columns:
+              - column:
+                  name: parent_id
+                  value: null
+              - column:
+                  name: post_id
+                  value: 1
+              - column:
+                  name: user_id
+                  value: 2
+              - column:
+                  name: time
+                  value: "02.03.2021"
+              - column:
+                  name: text
+                  value: "Some comment1"
+        - insert:
+            tableName: post_comments
+            columns:
+              - column:
+                  name: parent_id
+                  value: 1
+              - column:
+                  name: post_id
+                  value: 1
+              - column:
+                  name: user_id
+                  value: 1
+              - column:
+                  name: time
+                  value: "02.03.2021"
+              - column:
+                  name: text
+                  value: "Some comment2"
+        - insert:
+            tableName: post_comments
+            columns:
+              - column:
+                  name: parent_id
+                  value: 1
+              - column:
+                  name: post_id
+                  value: 1
+              - column:
+                  name: user_id
+                  value: 3
+              - column:
+                  name: time
+                  value: "02.03.2021"
+              - column:
+                  name: text
+                  value: "Some comment3"
+        - insert:
+            tableName: post_comments
+            columns:
+              - column:
+                  name: parent_id
+                  value: 2
+              - column:
+                  name: post_id
+                  value: 1
+              - column:
+                  name: user_id
+                  value: 1
+              - column:
+                  name: time
+                  value: "02.03.2021"
+              - column:
+                  name: text
+                  value: "Some comment4"

@@ -1,0 +1,23 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1614582803160-33
+      author: your_liquibase_username (generated)
+      changes:
+        - insert:
+            tableName: tags
+            columns:
+              - column:
+                  name: name
+                  value: "SomeTag1"
+        - insert:
+            tableName: tags
+            columns:
+              - column:
+                  name: name
+                  value: "SomeTag2"
+        - insert:
+            tableName: tags
+            columns:
+              - column:
+                  name: name
+                  value: "SomeTag3"
