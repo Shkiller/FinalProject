@@ -23,6 +23,3 @@ databaseChangeLog:
   - include:
         file: postComment4Test.yaml
         relativeToChangelogFile: true
-#  - include:
-#          file: user.xml
-#          relativeToChangelogFile: true

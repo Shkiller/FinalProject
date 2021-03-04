@@ -1,6 +1,6 @@
 databaseChangeLog:
 - changeSet:
-    id: 1614699962596-1
+    id: 1614849783504-1
     author: nat-l (generated)
     changes:
     - createTable:
@@ -29,7 +29,7 @@ databaseChangeLog:
             type: datetime
         tableName: captcha_codes
 - changeSet:
-    id: 1614699962596-2
+    id: 1614849783504-2
     author: nat-l (generated)
     changes:
     - createTable:
@@ -52,7 +52,7 @@ databaseChangeLog:
             type: VARCHAR(255)
         tableName: global_settings
 - changeSet:
-    id: 1614699962596-3
+    id: 1614849783504-3
     author: nat-l (generated)
     changes:
     - createTable:
@@ -89,7 +89,7 @@ databaseChangeLog:
             type: INT
         tableName: post_comments
 - changeSet:
-    id: 1614699962596-4
+    id: 1614849783504-4
     author: nat-l (generated)
     changes:
     - createTable:
@@ -123,7 +123,7 @@ databaseChangeLog:
             type: INT
         tableName: post_votes
 - changeSet:
-    id: 1614699962596-5
+    id: 1614849783504-5
     author: nat-l (generated)
     changes:
     - createTable:
@@ -144,7 +144,7 @@ databaseChangeLog:
             constraints:
               nullable: false
             name: moderation_status
-            type: ENUM('DECLINED', 'ACCEPTED', 'NEW')
+            type: ENUM('NEW', 'ACCEPTED', 'DECLINED')
         - column:
             constraints:
               nullable: false
@@ -175,7 +175,7 @@ databaseChangeLog:
             type: INT
         tableName: posts
 - changeSet:
-    id: 1614699962596-6
+    id: 1614849783504-6
     author: nat-l (generated)
     changes:
     - createTable:
@@ -199,7 +199,7 @@ databaseChangeLog:
             type: INT
         tableName: tag2post
 - changeSet:
-    id: 1614699962596-7
+    id: 1614849783504-7
     author: nat-l (generated)
     changes:
     - createTable:
@@ -218,7 +218,7 @@ databaseChangeLog:
             type: VARCHAR(255)
         tableName: tags
 - changeSet:
-    id: 1614699962596-8
+    id: 1614849783504-8
     author: nat-l (generated)
     changes:
     - createTable:
@@ -263,17 +263,17 @@ databaseChangeLog:
             type: datetime
         tableName: users
 - changeSet:
-    id: 1614699962596-9
+    id: 1614849783504-9
     author: nat-l (generated)
     changes:
     - createIndex:
         columns:
         - column:
             name: user_id
-        indexName: FK5lidm6cqbc7u4xhqpxm898qme
+        indexName: FK5sco241pb0dja052701tgpanj
         tableName: posts
 - changeSet:
-    id: 1614699962596-10
+    id: 1614849783504-10
     author: nat-l (generated)
     changes:
     - createIndex:
@@ -283,7 +283,7 @@ databaseChangeLog:
         indexName: FK6m7nr3iwh1auer2hk7rd05riw
         tableName: posts
 - changeSet:
-    id: 1614699962596-11
+    id: 1614849783504-11
     author: nat-l (generated)
     changes:
     - createIndex:
@@ -293,7 +293,7 @@ databaseChangeLog:
         indexName: FK9jh5u17tmu1g7xnlxa77ilo3u
         tableName: post_votes
 - changeSet:
-    id: 1614699962596-12
+    id: 1614849783504-12
     author: nat-l (generated)
     changes:
     - createIndex:
@@ -303,7 +303,17 @@ databaseChangeLog:
         indexName: FK9q09ho9p8fmo6rcysnci8rocc
         tableName: post_votes
 - changeSet:
-    id: 1614699962596-13
+    id: 1614849783504-13
+    author: nat-l (generated)
+    changes:
+    - createIndex:
+        columns:
+        - column:
+            name: post_id
+        indexName: FKaawaqxjs3br8dw5v90w7uu514
+        tableName: post_comments
+- changeSet:
+    id: 1614849783504-14
     author: nat-l (generated)
     changes:
     - createIndex:
@@ -313,7 +323,7 @@ databaseChangeLog:
         indexName: FKc3b7s6wypcsvua2ycn4o1lv2c
         tableName: post_comments
 - changeSet:
-    id: 1614699962596-14
+    id: 1614849783504-15
     author: nat-l (generated)
     changes:
     - createIndex:
@@ -323,7 +333,7 @@ databaseChangeLog:
         indexName: FKjou6suf2w810t2u3l96uasw3r
         tableName: tag2post
 - changeSet:
-    id: 1614699962596-15
+    id: 1614849783504-16
     author: nat-l (generated)
     changes:
     - createIndex:
@@ -333,7 +343,7 @@ databaseChangeLog:
         indexName: FKpjoedhh4h917xf25el3odq20i
         tableName: tag2post
 - changeSet:
-    id: 1614699962596-16
+    id: 1614849783504-17
     author: nat-l (generated)
     changes:
     - createIndex:
@@ -343,36 +353,11 @@ databaseChangeLog:
         indexName: FKsnxoecngu89u3fh4wdrgf0f2g
         tableName: post_comments
 - changeSet:
-    id: 1614699962596-17
-    author: nat-l (generated)
-    changes:
-    - createIndex:
-        columns:
-        - column:
-            name: post_id
-        indexName: FKtr9d4blnphdkhu225li18pmtw
-        tableName: post_comments
-- changeSet:
-    id: 1614699962596-18
+    id: 1614849783504-18
     author: nat-l (generated)
     changes:
     - addForeignKeyConstraint:
         baseColumnNames: user_id
-        baseTableName: posts
-        constraintName: FK5lidm6cqbc7u4xhqpxm898qme
-        deferrable: false
-        initiallyDeferred: false
-        onDelete: NO ACTION
-        onUpdate: NO ACTION
-        referencedColumnNames: id
-        referencedTableName: users
-        validate: true
-- changeSet:
-    id: 1614699962596-19
-    author: nat-l (generated)
-    changes:
-    - addForeignKeyConstraint:
-        baseColumnNames: id
         baseTableName: posts
         constraintName: FK5sco241pb0dja052701tgpanj
         deferrable: false
@@ -383,7 +368,7 @@ databaseChangeLog:
         referencedTableName: users
         validate: true
 - changeSet:
-    id: 1614699962596-20
+    id: 1614849783504-19
     author: nat-l (generated)
     changes:
     - addForeignKeyConstraint:
@@ -398,7 +383,7 @@ databaseChangeLog:
         referencedTableName: users
         validate: true
 - changeSet:
-    id: 1614699962596-21
+    id: 1614849783504-20
     author: nat-l (generated)
     changes:
     - addForeignKeyConstraint:
@@ -413,7 +398,7 @@ databaseChangeLog:
         referencedTableName: posts
         validate: true
 - changeSet:
-    id: 1614699962596-22
+    id: 1614849783504-21
     author: nat-l (generated)
     changes:
     - addForeignKeyConstraint:
@@ -428,7 +413,7 @@ databaseChangeLog:
         referencedTableName: users
         validate: true
 - changeSet:
-    id: 1614699962596-23
+    id: 1614849783504-22
     author: nat-l (generated)
     changes:
     - addForeignKeyConstraint:
@@ -443,7 +428,7 @@ databaseChangeLog:
         referencedTableName: posts
         validate: true
 - changeSet:
-    id: 1614699962596-24
+    id: 1614849783504-23
     author: nat-l (generated)
     changes:
     - addForeignKeyConstraint:
@@ -458,7 +443,22 @@ databaseChangeLog:
         referencedTableName: post_comments
         validate: true
 - changeSet:
-    id: 1614699962596-25
+    id: 1614849783504-24
+    author: nat-l (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: id
+        baseTableName: post_votes
+        constraintName: FKhpebcbfrex3uv28qr3xh230c0
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: id
+        referencedTableName: posts
+        validate: true
+- changeSet:
+    id: 1614849783504-25
     author: nat-l (generated)
     changes:
     - addForeignKeyConstraint:
@@ -473,7 +473,7 @@ databaseChangeLog:
         referencedTableName: tags
         validate: true
 - changeSet:
-    id: 1614699962596-26
+    id: 1614849783504-26
     author: nat-l (generated)
     changes:
     - addForeignKeyConstraint:
@@ -488,7 +488,7 @@ databaseChangeLog:
         referencedTableName: posts
         validate: true
 - changeSet:
-    id: 1614699962596-27
+    id: 1614849783504-27
     author: nat-l (generated)
     changes:
     - addForeignKeyConstraint:
@@ -501,5 +501,20 @@ databaseChangeLog:
         onUpdate: NO ACTION
         referencedColumnNames: id
         referencedTableName: users
+        validate: true
+- changeSet:
+    id: 1614849783504-28
+    author: nat-l (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: id
+        baseTableName: post_comments
+        constraintName: FKtr9d4blnphdkhu225li18pmtw
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: id
+        referencedTableName: posts
         validate: true
 

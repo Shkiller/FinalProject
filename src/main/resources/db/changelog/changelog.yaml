@@ -1,19 +1,19 @@
 databaseChangeLog:
 - changeSet:
-    id: 1614706002305-1
+    id: 1614849809662-1
     author: nat-l (generated)
     changes:
     - dropForeignKeyConstraint:
-        baseTableName: post_comments
-        constraintName: FKtr9d4blnphdkhu225li18pmtw
+        baseTableName: posts
+        constraintName: FK5sco241pb0dja052701tgpanj
 - changeSet:
-    id: 1614706002305-2
+    id: 1614849809662-2
     author: nat-l (generated)
     changes:
     - addForeignKeyConstraint:
         baseColumnNames: id
-        baseTableName: post_comments
-        constraintName: FKtr9d4blnphdkhu225li18pmtw
+        baseTableName: posts
+        constraintName: FK5sco241pb0dja052701tgpanj
         referencedColumnNames: id
-        referencedTableName: posts
+        referencedTableName: users
 

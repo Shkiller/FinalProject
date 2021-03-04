@@ -1,9 +1,20 @@
 package main.controller;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import main.service.PostService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
-@RequestMapping("/api/post/")
+@RestController
 public class ApiPostController {
+    private final PostService postService;
+
+    public ApiPostController(PostService postService) {
+        this.postService = postService;
+    }
+
+    @GetMapping("/api/post")
+    private ResponseEntity post() {
+        return postService.getPosts();
+    }
 }

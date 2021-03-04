@@ -15,7 +15,7 @@ databaseChangeLog:
                   value: "Многопользовательский режим"
               - column:
                   name: value
-                  value: "YES / NO"
+                  value: "YES"
         - insert:
             tableName: global_settings
             columns:
@@ -27,7 +27,7 @@ databaseChangeLog:
                   value: "Премодерация постов"
               - column:
                   name: value
-                  value: "YES / NO"
+                  value: "YES"
         - insert:
             tableName: global_settings
             columns:
@@ -39,4 +39,4 @@ databaseChangeLog:
                   value: "Показывать всем статистику блога"
               - column:
                   name: value
-                  value: "YES / NO"
+                  value: "NO"

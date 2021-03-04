@@ -45,6 +45,8 @@ public class Post {
     @Column(name = "view_count",nullable = false)
     private int viewCount;
     @OneToMany(mappedBy = "id")
+    private Set<PostVote> postVotes = new HashSet<>();
+    @OneToMany(mappedBy = "id")
     private Set<PostComment> postComments = new HashSet<>();
     @ManyToMany()
     @JoinTable(name = "tag2post",
@@ -146,5 +148,18 @@ public class Post {
 
     public void setViewCount(int viewCount) {
         this.viewCount = viewCount;
+    }
+
+    public Set<PostVote> getPostVotes() {
+        return postVotes;
+    }
+
+    public void setPostVotes(Set<PostVote> postVotes) {
+        this.postVotes = postVotes;
+    }
+    public void addPostVotes(PostVote postVote) {
+        postVote.setPost(this);
+        postVotes.add(postVote);
+
     }
 }
