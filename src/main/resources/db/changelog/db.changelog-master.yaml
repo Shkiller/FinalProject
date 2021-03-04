@@ -1,6 +1,9 @@
 databaseChangeLog:
+#  - include:
+#      file: changelog.yaml
+#      relativeToChangelogFile: true
   - include:
-      file: changelog.yaml
+      file: liquibase-outputChangeLog.yaml
       relativeToChangelogFile: true
   - include:
       file: globalSetting.yaml
@@ -23,6 +26,7 @@ databaseChangeLog:
   - include:
         file: postComment4Test.yaml
         relativeToChangelogFile: true
+
 #  - include:
 #          file: user.xml
 #          relativeToChangelogFile: true

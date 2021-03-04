@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: 1614582803160-31
+      id: 1614582803160-40
       author: your_liquibase_username (generated)
       changes:
         - insert:
@@ -22,7 +22,7 @@ databaseChangeLog:
                   value: 2
               - column:
                   name: time
-                  value: "02.03.2021"
+                  value: "2021-03-02 21:00:00"
               - column:
                   name: title
                   value: "Post"
@@ -50,7 +50,7 @@ databaseChangeLog:
                   value: 3
               - column:
                   name: time
-                  value: "02.03.2021"
+                  value: "2021-03-03 21:00:00"
               - column:
                   name: title
                   value: "Post"
@@ -78,7 +78,7 @@ databaseChangeLog:
                   value: 2
               - column:
                   name: time
-                  value: "02.03.2021"
+                  value: "2021-03-03 20:00:00"
               - column:
                   name: title
                   value: "Post"
