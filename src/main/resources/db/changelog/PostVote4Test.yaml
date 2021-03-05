@@ -18,7 +18,23 @@ databaseChangeLog:
               - column:
                   name: value
                   type: BIT(1)
-                  valueBoolean: "1"
+                  valueBoolean: "true"
+        - insert:
+            tableName: post_votes
+            columns:
+              - column:
+                  name: user_id
+                  value: 3
+              - column:
+                  name: post_id
+                  value: 1
+              - column:
+                  name: time
+                  value: "02.03.2021"
+              - column:
+                  name: value
+                  type: BIT(1)
+                  valueBoolean: "true"
         - insert:
             tableName: post_votes
             columns:
@@ -34,4 +50,4 @@ databaseChangeLog:
               - column:
                   name: value
                   type: BIT(1)
-                  valueBoolean: "-1"
+                  valueBoolean: "false"

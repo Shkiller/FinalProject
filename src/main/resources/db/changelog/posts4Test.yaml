@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: 1614582803160-40
+      id: 1614582803160-31
       author: your_liquibase_username (generated)
       changes:
         - insert:
@@ -15,20 +15,28 @@ databaseChangeLog:
                   value: "ACCEPTED"
               - column:
                   name: moderator_id
-                  type: INT
-                  valueComputed: 1
+                  value: 1
               - column:
                   name: user_id
                   value: 2
               - column:
                   name: time
-                  value: "2021-03-02 21:00:00"
+                  valueDate: "2021-03-02"
               - column:
                   name: title
                   value: "Post"
               - column:
                   name: text
-                  value: "Some text1"
+                  value: "<body>
+                          <h1 >Заголовок h1</h1>
+                           <h2>Заголовок h2</h2>
+                           <h3 >Заголовок h3</h3>
+                           <h4 >Заголовок h4</h4>
+                           <h5>Заголовок h5</h5>
+                           <h6> Заголовок h6</h6>
+                           <p > Этот тег предназначен для разбивки текста на параграфы в html документе. Здесь текст будет выравниваться одновременно по левому и правому краям документа.
+                           dasdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd.</p>
+                           </body>"
               - column:
                   name: view_count
                   value: 0
@@ -38,19 +46,19 @@ databaseChangeLog:
               - column:
                   name: is_active
                   type: BIT(1)
-                  valueBoolean: "false"
+                  valueBoolean: "true"
               - column:
                   name: moderation_status
-                  value: "NEW"
+                  value: "ACCEPTED"
               - column:
                   name: moderator_id
-                  value: null
+                  value: 1
               - column:
                   name: user_id
                   value: 3
               - column:
                   name: time
-                  value: "2021-03-03 21:00:00"
+                  valueDate: "2021-03-03"
               - column:
                   name: title
                   value: "Post"
@@ -66,10 +74,262 @@ databaseChangeLog:
               - column:
                   name: is_active
                   type: BIT(1)
+                  valueBoolean: "true"
+              - column:
+                  name: moderation_status
+                  value: "ACCEPTED"
+              - column:
+                  name: moderator_id
+                  value: 1
+              - column:
+                  name: user_id
+                  value: 2
+              - column:
+                  name: time
+                  valueDate: "2021-03-03"
+              - column:
+                  name: title
+                  value: "Post"
+              - column:
+                  name: text
+                  value: "Some text3"
+              - column:
+                  name: view_count
+                  value: 0
+        - insert:
+            tableName: posts
+            columns:
+              - column:
+                  name: is_active
+                  type: BIT(1)
+                  valueBoolean: "true"
+              - column:
+                  name: moderation_status
+                  value: "ACCEPTED"
+              - column:
+                  name: moderator_id
+                  value: 1
+              - column:
+                  name: user_id
+                  value: 2
+              - column:
+                  name: time
+                  valueDate: "2021-03-03"
+              - column:
+                  name: title
+                  value: "Post"
+              - column:
+                  name: text
+                  value: "Some text4"
+              - column:
+                  name: view_count
+                  value: 0
+        - insert:
+            tableName: posts
+            columns:
+              - column:
+                  name: is_active
+                  type: BIT(1)
+                  valueBoolean: "true"
+              - column:
+                  name: moderation_status
+                  value: "ACCEPTED"
+              - column:
+                  name: moderator_id
+                  value: 1
+              - column:
+                  name: user_id
+                  value: 2
+              - column:
+                  name: time
+                  valueDate: "2021-03-03"
+              - column:
+                  name: title
+                  value: "Post"
+              - column:
+                  name: text
+                  value: "Some text5"
+              - column:
+                  name: view_count
+                  value: 0
+        - insert:
+            tableName: posts
+            columns:
+              - column:
+                  name: is_active
+                  type: BIT(1)
+                  valueBoolean: "true"
+              - column:
+                  name: moderation_status
+                  value: "ACCEPTED"
+              - column:
+                  name: moderator_id
+                  value: 1
+              - column:
+                  name: user_id
+                  value: 2
+              - column:
+                  name: time
+                  valueDate: "2021-03-02"
+              - column:
+                  name: title
+                  value: "Post"
+              - column:
+                  name: text
+                  value: "Some text6"
+              - column:
+                  name: view_count
+                  value: 0
+        - insert:
+            tableName: posts
+            columns:
+              - column:
+                  name: is_active
+                  type: BIT(1)
+                  valueBoolean: "true"
+              - column:
+                  name: moderation_status
+                  value: "ACCEPTED"
+              - column:
+                  name: moderator_id
+                  value: 1
+              - column:
+                  name: user_id
+                  value: 2
+              - column:
+                  name: time
+                  valueDate: "2021-02-03"
+              - column:
+                  name: title
+                  value: "Post"
+              - column:
+                  name: text
+                  value: "Some text7"
+              - column:
+                  name: view_count
+                  value: 0
+        - insert:
+            tableName: posts
+            columns:
+              - column:
+                  name: is_active
+                  type: BIT(1)
+                  valueBoolean: "true"
+              - column:
+                  name: moderation_status
+                  value: "ACCEPTED"
+              - column:
+                  name: moderator_id
+                  value: 1
+              - column:
+                  name: user_id
+                  value: 2
+              - column:
+                  name: time
+                  valueDate: "2021-01-03"
+              - column:
+                  name: title
+                  value: "Post"
+              - column:
+                  name: text
+                  value: "Some text8"
+              - column:
+                  name: view_count
+                  value: 0
+        - insert:
+            tableName: posts
+            columns:
+              - column:
+                  name: is_active
+                  type: BIT(1)
+                  valueBoolean: "true"
+              - column:
+                  name: moderation_status
+                  value: "ACCEPTED"
+              - column:
+                  name: moderator_id
+                  value: 1
+              - column:
+                  name: user_id
+                  value: 3
+              - column:
+                  name: time
+                  valueDate: "2021-01-03"
+              - column:
+                  name: title
+                  value: "Post"
+              - column:
+                  name: text
+                  value: "Some text9"
+              - column:
+                  name: view_count
+                  value: 0
+        - insert:
+            tableName: posts
+            columns:
+              - column:
+                  name: is_active
+                  type: BIT(1)
+                  valueBoolean: "true"
+              - column:
+                  name: moderation_status
+                  value: "ACCEPTED"
+              - column:
+                  name: moderator_id
+                  value: 1
+              - column:
+                  name: user_id
+                  value: 3
+              - column:
+                  name: time
+                  valueDate: "2021-01-03"
+              - column:
+                  name: title
+                  value: "Post"
+              - column:
+                  name: text
+                  value: "Some text10"
+              - column:
+                  name: view_count
+                  value: 0
+        - insert:
+            tableName: posts
+            columns:
+              - column:
+                  name: is_active
+                  type: BIT(1)
+                  valueBoolean: "true"
+              - column:
+                  name: moderation_status
+                  value: "ACCEPTED"
+              - column:
+                  name: moderator_id
+                  value: 1
+              - column:
+                  name: user_id
+                  value: 3
+              - column:
+                  name: time
+                  valueDate: "2021-01-03"
+              - column:
+                  name: title
+                  value: "Post"
+              - column:
+                  name: text
+                  value: "Some text11"
+              - column:
+                  name: view_count
+                  value: 0
+        - insert:
+            tableName: posts
+            columns:
+              - column:
+                  name: is_active
+                  type: BIT(1)
                   valueBoolean: "false"
               - column:
                   name: moderation_status
-                  value: "NEW"
+                  value: "new"
               - column:
                   name: moderator_id
                   value: null
@@ -78,13 +338,97 @@ databaseChangeLog:
                   value: 2
               - column:
                   name: time
-                  value: "2021-03-03 20:00:00"
+                  valueDate: "2021-01-03"
               - column:
                   name: title
                   value: "Post"
               - column:
                   name: text
-                  value: "Some text3"
+                  value: "Some text12"
+              - column:
+                  name: view_count
+                  value: 0
+        - insert:
+            tableName: posts
+            columns:
+              - column:
+                  name: is_active
+                  type: BIT(1)
+                  valueBoolean: "false"
+              - column:
+                  name: moderation_status
+                  value: "new"
+              - column:
+                  name: moderator_id
+                  value: null
+              - column:
+                  name: user_id
+                  value: 2
+              - column:
+                  name: time
+                  valueDate: "2022-01-03"
+              - column:
+                  name: title
+                  value: "Post"
+              - column:
+                  name: text
+                  value: "Some text13"
+              - column:
+                  name: view_count
+                  value: 0
+        - insert:
+            tableName: posts
+            columns:
+              - column:
+                  name: is_active
+                  type: BIT(1)
+                  valueBoolean: "true"
+              - column:
+                  name: moderation_status
+                  value: "ACCEPTED"
+              - column:
+                  name: moderator_id
+                  value: 1
+              - column:
+                  name: user_id
+                  value: 2
+              - column:
+                  name: time
+                  valueDate: "2022-01-03"
+              - column:
+                  name: title
+                  value: "Post"
+              - column:
+                  name: text
+                  value: "Some text14"
+              - column:
+                  name: view_count
+                  value: 0
+        - insert:
+            tableName: posts
+            columns:
+              - column:
+                  name: is_active
+                  type: BIT(1)
+                  valueBoolean: "true"
+              - column:
+                  name: moderation_status
+                  value: "ACCEPTED"
+              - column:
+                  name: moderator_id
+                  value: 1
+              - column:
+                  name: user_id
+                  value: 3
+              - column:
+                  name: time
+                  valueDate: "2022-01-03"
+              - column:
+                  name: title
+                  value: "Post"
+              - column:
+                  name: text
+                  value: "Some text15"
               - column:
                   name: view_count
                   value: 0
