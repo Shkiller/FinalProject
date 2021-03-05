@@ -17,16 +17,19 @@ public class SettingsService {
     public SettingsService(SettingsRepository settingsRepository) {
         this.settingsRepository = settingsRepository;
     }
-    public ResponseEntity getGlobalSettings()
-    {
+
+    public ResponseEntity getGlobalSettings() {
         SettingsResponse settingsResponse = new SettingsResponse();
-        settingsRepository.findById(MULTIUSER_MODE).map(globalSetting -> {settingsResponse.setMultiuserMode(globalSetting.getValue().equals("YES"));
-        return null;
-        });
-        settingsRepository.findById(POST_PREMODERATION).map(globalSetting -> {settingsResponse.setPostPremoderation(globalSetting.getValue().equals("YES"));
+        settingsRepository.findById(MULTIUSER_MODE).map(globalSetting -> {
+            settingsResponse.setMultiuserMode(globalSetting.getValue().equals("YES"));
             return null;
         });
-        settingsRepository.findById(STATISTICS_IS_PUBLIC).map(globalSetting -> {settingsResponse.setStatisticIsPublic(globalSetting.getValue().equals("YES"));
+        settingsRepository.findById(POST_PREMODERATION).map(globalSetting -> {
+            settingsResponse.setPostPremoderation(globalSetting.getValue().equals("YES"));
+            return null;
+        });
+        settingsRepository.findById(STATISTICS_IS_PUBLIC).map(globalSetting -> {
+            settingsResponse.setStatisticIsPublic(globalSetting.getValue().equals("YES"));
             return null;
         });
         return new ResponseEntity(settingsResponse, HttpStatus.OK);

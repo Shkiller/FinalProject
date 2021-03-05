@@ -21,7 +21,7 @@ public class TagService {
         this.postRepository = postRepository;
     }
 
-    public ResponseEntity getTags() {
+    public ResponseEntity getTags(String query) {
         Map<Tag, Double> tagMap = new HashMap<>();
         List<Tag4TagsResponse> tag4TagsResponseList = new ArrayList<>();
         TagsResponse tagsResponse = new TagsResponse();
@@ -29,11 +29,15 @@ public class TagService {
         postRepository.findAll().forEach(p -> {
             if (p.getIsActive() == 1 && p.getModerationStatus().equals(ModerationStatusType.ACCEPTED) && p.getTime().compareTo(new Date()) < 1)
                 postList.add(p);
-            p.getTags().forEach(tag -> tagMap.compute(tag, (k,v)->(v == null) ? v=1.0 : v+1.0));
+            p.getTags().forEach(tag -> {
+                        if (tag.getName().contains(query))
+                            tagMap.compute(tag, (k, v) -> (v == null) ? v = 1.0 : v + 1.0);
+                    }
+            );
         });
-        double maxWeight = tagMap.values().stream().max(Double::compare).orElse(0.0) /(double) postList.size();
+        double maxWeight = tagMap.values().stream().max(Double::compare).orElse(0.0) / (double) postList.size();
         if (maxWeight == 0.0)
-            return null;
+            return new ResponseEntity(null, HttpStatus.OK);
         else {
             double k = 1.0 / maxWeight;
             tagMap.forEach((tag, value) -> {

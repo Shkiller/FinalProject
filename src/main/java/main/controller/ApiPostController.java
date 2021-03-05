@@ -18,6 +18,6 @@ public class ApiPostController {
     private ResponseEntity post(@RequestParam(name = "offset", defaultValue = "0") int offset,
                                 @RequestParam(name = "limit", defaultValue = "10") int limit,
                                 @RequestParam(name = "mode") String mode) {
-        return postService.getPosts(offset,limit,mode);
+        return postService.getPosts(offset, limit, mode);
     }
 }

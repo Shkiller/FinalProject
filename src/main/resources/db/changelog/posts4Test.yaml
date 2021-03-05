@@ -27,7 +27,16 @@ databaseChangeLog:
                   value: "Post"
               - column:
                   name: text
-                  value: "Some text1"
+                  value: "<body>
+                          <h1 >Заголовок h1</h1>
+                           <h2>Заголовок h2</h2>
+                           <h3 >Заголовок h3</h3>
+                           <h4 >Заголовок h4</h4>
+                           <h5>Заголовок h5</h5>
+                           <h6> Заголовок h6</h6>
+                           <p > Этот тег предназначен для разбивки текста на параграфы в html документе. Здесь текст будет выравниваться одновременно по левому и правому краям документа.
+                           dasdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd.</p>
+                           </body>"
               - column:
                   name: view_count
                   value: 0
