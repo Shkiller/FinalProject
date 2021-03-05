@@ -14,7 +14,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "tags")
-public class Tag  {
+public class Tag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -25,6 +25,7 @@ public class Tag  {
             joinColumns = {@JoinColumn(name = "tag_id")},
             inverseJoinColumns = {@JoinColumn(name = "post_id")})
     private List<Post> posts;
+
     public List<Post> getPosts() {
         return posts;
     }

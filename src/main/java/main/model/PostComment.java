@@ -11,10 +11,11 @@ import javax.persistence.JoinColumn;
 
 
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 @Table(name = "post_comments")
-public class PostComment  {
+public class PostComment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -77,5 +78,18 @@ public class PostComment  {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PostComment that = (PostComment) o;
+        return id == that.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
