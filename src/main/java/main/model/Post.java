@@ -14,10 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.JoinTable;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "posts")
@@ -28,23 +25,27 @@ public class Post {
     @Column(name = "is_active", nullable = false, columnDefinition = "TINYINT(1)")
     private byte isActive;
     @Enumerated(EnumType.STRING)
-    @Column(name = "moderation_status",columnDefinition = "enum('NEW','ACCEPTED','DECLINED')",nullable = false)
+    @Column(name = "moderation_status", columnDefinition = "enum('NEW','ACCEPTED','DECLINED')", nullable = false)
     private ModerationStatusType moderationStatus;
     @ManyToOne
     @JoinColumn(name = "moderator_id")
     private User moderator;
     @ManyToOne
-    @JoinColumn(name = "user_id",nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
     @Column(nullable = false)
     private Date time;
     @Column(nullable = false)
     private String title;
-    @Column(columnDefinition="Text",nullable = false)
+    @Column(columnDefinition = "Text", nullable = false)
     private String text;
-    @Column(name = "view_count",nullable = false)
+    @Column(name = "view_count", nullable = false)
     private int viewCount;
-    @OneToMany(mappedBy = "id")
+    @OneToMany
+    @JoinColumn(name = "post_id")
+    private Set<PostVote> postVotes = new HashSet<>();
+    @OneToMany
+    @JoinColumn(name = "post_id")
     private Set<PostComment> postComments = new HashSet<>();
     @ManyToMany()
     @JoinTable(name = "tag2post",
@@ -56,9 +57,11 @@ public class Post {
             joinColumns = {@JoinColumn(name = "post_id")},
             inverseJoinColumns = {@JoinColumn(name = "user_id")})
     private List<User> userVotes;
+
     public List<User> getUserVotes() {
         return userVotes;
     }
+
     public List<Tag> getTags() {
         return tags;
     }
@@ -76,6 +79,8 @@ public class Post {
         postComments.add(postComment);
 
     }
+
+
     public int getId() {
         return id;
     }
@@ -146,5 +151,32 @@ public class Post {
 
     public void setViewCount(int viewCount) {
         this.viewCount = viewCount;
+    }
+
+    public Set<PostVote> getPostVotes() {
+        return postVotes;
+    }
+
+    public void setPostVotes(Set<PostVote> postVotes) {
+        this.postVotes = postVotes;
+    }
+
+    public void addPostVotes(PostVote postVote) {
+        postVote.setPost(this);
+        postVotes.add(postVote);
+
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Post post = (Post) o;
+        return id == post.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
