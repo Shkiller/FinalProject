@@ -36,7 +36,7 @@ public class ApiGeneralController {
 
     @GetMapping("/tag")
     private ResponseEntity tag(@RequestParam(name = "query", defaultValue = "") String query) {
-        return tagService.getTags(query);
+        return tagService.getTags(query.trim());
     }
 
 }
