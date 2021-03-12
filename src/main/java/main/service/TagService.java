@@ -7,6 +7,7 @@ import main.model.ModerationStatusType;
 import main.model.Post;
 import main.model.Tag;
 import main.repository.PostRepository;
+import main.repository.PostSortingRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ public class TagService {
         this.postRepository = postRepository;
     }
 
-    public ResponseEntity getTags(String query) {
+    public TagsResponse getTags(String query) {
         Map<Tag, Double> tagMap = new HashMap<>();
         List<Tag4TagsResponse> tag4TagsResponseList = new ArrayList<>();
         TagsResponse tagsResponse = new TagsResponse();
@@ -36,9 +37,7 @@ public class TagService {
             );
         });
         double maxWeight = tagMap.values().stream().max(Double::compare).orElse(0.0) / (double) postList.size();
-        if (maxWeight == 0.0)
-            return new ResponseEntity(null, HttpStatus.OK);
-        else {
+        if (maxWeight != 0.0) {
             double k = 1.0 / maxWeight;
             tagMap.forEach((tag, value) -> {
                 Tag4TagsResponse tag4TagsResponse = new Tag4TagsResponse();
@@ -48,7 +47,7 @@ public class TagService {
             });
             Tag4TagsResponse[] tags4PostResponse = tag4TagsResponseList.toArray(new Tag4TagsResponse[0]);
             tagsResponse.setTags(tags4PostResponse);
-            return new ResponseEntity(tagsResponse, HttpStatus.OK);
         }
+        return tagsResponse;
     }
 }

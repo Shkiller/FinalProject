@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CheckService {
 
-    public ResponseEntity getCheck() {
-        return new ResponseEntity(new CheckResponse(), HttpStatus.OK);
+    public CheckResponse getCheck() {
+        return new CheckResponse();
     }
 }

@@ -1,9 +1,11 @@
 package main.controller;
 
 import main.service.CheckService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -18,7 +20,6 @@ public class ApiAuthController {
     @GetMapping("/check")
     private ResponseEntity check() {
 
-        return checkService.getCheck();
+        return new ResponseEntity(checkService.getCheck(), HttpStatus.OK);
     }
-
 }

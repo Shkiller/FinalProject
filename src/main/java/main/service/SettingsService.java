@@ -20,17 +20,18 @@ public class SettingsService {
 
     public ResponseEntity getGlobalSettings() {
         SettingsResponse settingsResponse = new SettingsResponse();
-        settingsRepository.findById(MULTIUSER_MODE).map(globalSetting -> {
-            settingsResponse.setMultiuserMode(globalSetting.getValue().equals("YES"));
-            return null;
-        });
-        settingsRepository.findById(POST_PREMODERATION).map(globalSetting -> {
-            settingsResponse.setPostPremoderation(globalSetting.getValue().equals("YES"));
-            return null;
-        });
-        settingsRepository.findById(STATISTICS_IS_PUBLIC).map(globalSetting -> {
-            settingsResponse.setStatisticIsPublic(globalSetting.getValue().equals("YES"));
-            return null;
+        settingsRepository.findAll().forEach(gS -> {
+            switch (gS.getId()) {
+                case MULTIUSER_MODE:
+                    settingsResponse.setMultiuserMode(gS.getValue().equals("YES"));
+                    break;
+                case POST_PREMODERATION:
+                    settingsResponse.setPostPremoderation(gS.getValue().equals("YES"));
+                    break;
+                case STATISTICS_IS_PUBLIC:
+                    settingsResponse.setStatisticIsPublic(gS.getValue().equals("YES"));
+                    break;
+            }
         });
         return new ResponseEntity(settingsResponse, HttpStatus.OK);
     }
