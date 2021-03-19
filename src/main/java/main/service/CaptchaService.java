@@ -3,6 +3,7 @@ import com.github.cage.GCage;
 import main.api.response.CaptchaResponse;
 import main.model.CaptchaCode;
 import main.repository.CaptchaRepository;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import javax.imageio.ImageIO;
 import java.io.ByteArrayOutputStream;
@@ -16,9 +17,10 @@ import java.util.Date;
 
 @Service
 public class CaptchaService {
-    final String BASE64 = "data:image/png;base64, ";
-    final long HOUR = 3600000;
-    final CaptchaRepository captchaRepository;
+    private final String BASE64 = "data:image/png;base64, ";
+    @Value("${captcha.deleteTime}")
+    private long hour;
+    private final CaptchaRepository captchaRepository;
 
     public CaptchaService(CaptchaRepository captchaRepository) {
         this.captchaRepository = captchaRepository;
@@ -43,7 +45,7 @@ public class CaptchaService {
         sb.append(s2);
         //
         captchaRepository.findAll().forEach(captchaCode -> {
-            if(new Date().getTime()-captchaCode.getTime().getTime()>=HOUR)
+            if(new Date().getTime()-captchaCode.getTime().getTime()>=hour)
             {
                 captchaRepository.delete(captchaCode);
             }

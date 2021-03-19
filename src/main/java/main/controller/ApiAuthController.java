@@ -37,6 +37,6 @@ public class ApiAuthController {
     @PostMapping("/register")
     private ResponseEntity register(@RequestBody RegisterRequest request)  {
 
-        return registerService.register(request);
+        return new ResponseEntity(registerService.register(request), HttpStatus.OK);
     }
 }

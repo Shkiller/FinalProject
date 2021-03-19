@@ -2,9 +2,10 @@ package main.api.response.register;
 
 import java.util.Map;
 
-public class RegisterFailResponse {
-    private Map<String, String> errors;
+public class RegisterResponse {
     private boolean result;
+    private Map<String, String> errors;
+
 
     public boolean isResult() {
         return result;

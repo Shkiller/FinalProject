@@ -1,16 +1,12 @@
 package main.service;
 
 import main.api.request.RegisterRequest;
-import main.api.response.register.RegisterCompleteResponse;
-import main.api.response.register.RegisterFailResponse;
+import main.api.response.register.RegisterResponse;
 import main.model.CaptchaCode;
 import main.model.User;
 import main.repository.CaptchaRepository;
 import main.repository.UserRepository;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -26,12 +22,13 @@ public class RegisterService {
         this.captchaRepository = captchaRepository;
     }
 
-    public ResponseEntity register(RegisterRequest request) {
+    public RegisterResponse register(RegisterRequest request) {
         Map<String, String> errors = new HashMap<>();
         CaptchaCode captchaCode = captchaRepository.findBySecretCode(request.getCaptchaSecret());
         if (request.getPassword().length() < PASS_LENGTH) {
             errors.put("password", "Пароль короче 6-ти символов");
         }
+
         if(userRepository.findByEmail(request.getEmail()).isPresent())
         {
             errors.put("email", "Этот e-mail уже зарегистрирован");
@@ -54,16 +51,16 @@ public class RegisterService {
             user.setRegistrationTime(new Date());
             user.setIsModerator((byte)0);
             userRepository.save(user);
-            RegisterCompleteResponse registerCompleteResponse = new RegisterCompleteResponse();
+            RegisterResponse registerCompleteResponse = new RegisterResponse();
             registerCompleteResponse.setResult(true);
-            return new ResponseEntity(registerCompleteResponse, HttpStatus.OK);
+            return registerCompleteResponse;
         }
         else
         {
-            RegisterFailResponse registerFailResponse = new RegisterFailResponse();
+            RegisterResponse registerFailResponse = new RegisterResponse();
             registerFailResponse.setResult(false);
             registerFailResponse.setErrors(errors);
-            return new ResponseEntity(registerFailResponse, HttpStatus.OK);
+            return registerFailResponse;
         }
     }
 }
