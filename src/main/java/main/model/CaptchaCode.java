@@ -19,7 +19,7 @@ public class CaptchaCode {
     private Date time;
     @Column(nullable = false, columnDefinition = "TINYTEXT")
     private String code;
-    @Column(nullable = false, columnDefinition = "TINYTEXT")
+    @Column(name ="secret_code" ,nullable = false, columnDefinition = "TINYTEXT")
     private String secretCode;
 
     public int getId() {

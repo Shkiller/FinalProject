@@ -1,15 +1,12 @@
 package main.service;
 
 
-import main.api.response.Tag4TagsResponse;
-import main.api.response.TagsResponse;
+import main.api.response.tag.Tag4TagsResponse;
+import main.api.response.tag.TagsResponse;
 import main.model.ModerationStatusType;
 import main.model.Post;
 import main.model.Tag;
 import main.repository.PostRepository;
-import main.repository.PostSortingRepository;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.*;

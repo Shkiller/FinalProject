@@ -1,7 +1,7 @@
-package main.api.response;
+package main.api.response.tag;
 
 public class TagsResponse {
-    private Tag4TagsResponse [] tags;
+    private Tag4TagsResponse[] tags;
 
     public Tag4TagsResponse[] getTags() {
         return tags;

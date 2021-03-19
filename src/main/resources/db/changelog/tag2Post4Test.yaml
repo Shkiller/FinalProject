@@ -17,7 +17,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: post_id
-                  value: 1
+                  value: 5
               - column:
                   name: tag_id
                   value: 2
