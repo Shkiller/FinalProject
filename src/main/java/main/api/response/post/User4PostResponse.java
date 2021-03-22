@@ -1,4 +1,4 @@
-package main.api.response;
+package main.api.response.post;
 
 public class User4PostResponse {
     private int id;

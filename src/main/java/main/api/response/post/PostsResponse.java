@@ -1,4 +1,6 @@
-package main.api.response;
+package main.api.response.post;
+
+import main.api.response.post.Post4PostResponse;
 
 public class PostsResponse {
     private int count;

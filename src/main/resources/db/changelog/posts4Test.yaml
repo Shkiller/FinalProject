@@ -432,3 +432,31 @@ databaseChangeLog:
               - column:
                   name: view_count
                   value: 0
+        - insert:
+            tableName: posts
+            columns:
+              - column:
+                  name: is_active
+                  type: BIT(1)
+                  valueBoolean: "true"
+              - column:
+                  name: moderation_status
+                  value: "ACCEPTED"
+              - column:
+                  name: moderator_id
+                  value: 1
+              - column:
+                  name: user_id
+                  value: 3
+              - column:
+                  name: time
+                  valueDate: "2020-01-03"
+              - column:
+                  name: title
+                  value: "Post"
+              - column:
+                  name: text
+                  value: "Some text16"
+              - column:
+                  name: view_count
+                  value: 0

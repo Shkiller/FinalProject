@@ -1,15 +1,17 @@
-package main.api.response;
+package main.api.response.post;
 
-public class Post4PostResponse {
+public class PostIdResponse {
     private int id;
     private long timestamp;
+    private boolean active;
     private User4PostResponse user;
     private String title;
-    private String announce;
+    private String text;
     private int likeCount;
     private int dislikeCount;
-    private int commentCount;
     private int viewCount;
+    private Comment4PostIdResponse [] comments;
+    private String [] tags;
 
     public int getId() {
         return id;
@@ -25,6 +27,14 @@ public class Post4PostResponse {
 
     public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     public User4PostResponse getUser() {
@@ -43,12 +53,12 @@ public class Post4PostResponse {
         this.title = title;
     }
 
-    public String getAnnounce() {
-        return announce;
+    public String getText() {
+        return text;
     }
 
-    public void setAnnounce(String announce) {
-        this.announce = announce;
+    public void setText(String text) {
+        this.text = text;
     }
 
     public int getLikeCount() {
@@ -67,19 +77,27 @@ public class Post4PostResponse {
         this.dislikeCount = dislikeCount;
     }
 
-    public int getCommentCount() {
-        return commentCount;
-    }
-
-    public void setCommentCount(int commentCount) {
-        this.commentCount = commentCount;
-    }
-
     public int getViewCount() {
         return viewCount;
     }
 
     public void setViewCount(int viewCount) {
         this.viewCount = viewCount;
+    }
+
+    public Comment4PostIdResponse[] getComments() {
+        return comments;
+    }
+
+    public void setComments(Comment4PostIdResponse[] comments) {
+        this.comments = comments;
+    }
+
+    public String[] getTags() {
+        return tags;
+    }
+
+    public void setTags(String[] tags) {
+        this.tags = tags;
     }
 }

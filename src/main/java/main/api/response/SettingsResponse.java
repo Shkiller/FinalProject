@@ -34,8 +34,4 @@ public class SettingsResponse {
         this.statisticIsPublic = statisticIsPublic;
     }
 }
-//{
-//        "": false,
-//        "": true,
-//        "": true
-//        }
+

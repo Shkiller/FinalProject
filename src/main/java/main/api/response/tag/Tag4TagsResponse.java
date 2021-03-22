@@ -1,4 +1,4 @@
-package main.api.response;
+package main.api.response.tag;
 
 public class Tag4TagsResponse {
     private String name;
