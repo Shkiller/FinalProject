@@ -1,7 +1,9 @@
 package main.api.response.register;
 
-import java.util.Map;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
+import java.util.Map;
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class RegisterResponse {
     private boolean result;
     private Map<String, String> errors;

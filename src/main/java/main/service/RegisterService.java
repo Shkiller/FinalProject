@@ -6,6 +6,9 @@ import main.model.CaptchaCode;
 import main.model.User;
 import main.repository.CaptchaRepository;
 import main.repository.UserRepository;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.HashMap;
@@ -43,11 +46,12 @@ public class RegisterService {
         }
         if(errors.size()==0)
         {
+            PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(12);
             captchaRepository.delete(captchaCode);
             User user = new User();
             user.setName(request.getName());
             user.setEmail(request.getEmail());
-            user.setPassword(request.getPassword());
+            user.setPassword(passwordEncoder.encode(request.getPassword()));
             user.setRegistrationTime(new Date());
             user.setIsModerator((byte)0);
             userRepository.save(user);

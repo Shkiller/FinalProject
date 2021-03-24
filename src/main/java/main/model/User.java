@@ -143,4 +143,9 @@ public class User {
     public void setIsModerator(byte isModerator) {
         this.isModerator = isModerator;
     }
+
+    public Role getRole()
+    {
+        return isModerator == 1? Role.MODERATOR:Role.USER;
+    }
 }

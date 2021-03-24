@@ -21,7 +21,7 @@ databaseChangeLog:
                   value: "dadasd6@gmail.com"
               - column:
                   name: password
-                  value: "1234qwer"
+                  value: "$2a$12$eLUn91/p80NropqgENM6Z.PXDXUK3FNNK9G9l/0I9RQ9XROdOSzri"
               - column:
                   name: code
                   value: null
@@ -46,7 +46,7 @@ databaseChangeLog:
                   value: "dadasd2@gmail.com"
               - column:
                   name: password
-                  value: "1234qwer"
+                  value: "$2a$12$eLUn91/p80NropqgENM6Z.PXDXUK3FNNK9G9l/0I9RQ9XROdOSzri"
               - column:
                   name: code
                   value: null
@@ -71,7 +71,7 @@ databaseChangeLog:
                   value: "dadasd3@gmail.com"
               - column:
                   name: password
-                  value: "1234qwer"
+                  value: "$2a$12$eLUn91/p80NropqgENM6Z.PXDXUK3FNNK9G9l/0I9RQ9XROdOSzri"
               - column:
                   name: code
                   value: null
