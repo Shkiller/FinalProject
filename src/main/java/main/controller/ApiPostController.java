@@ -8,8 +8,10 @@ import org.springframework.security.access.prepost.PreAuthorize;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 
 
+//@PreAuthorize("hasAuthority('user:write')")
 
 @RestController
 public class ApiPostController {
@@ -20,7 +22,6 @@ public class ApiPostController {
     }
 
     @GetMapping("/api/post")
-    @PreAuthorize("hasAuthority('user:write')")
     public ResponseEntity post(@RequestParam(name = "offset", defaultValue = "0") int offset,
                                 @RequestParam(name = "limit", defaultValue = "10") int limit,
                                 @RequestParam(name = "mode") String mode) {
@@ -47,5 +48,23 @@ public class ApiPostController {
     @GetMapping("/api/post/{ID}")
     public ResponseEntity postId(@PathVariable int ID) throws EntityNotFoundException {
         return new ResponseEntity(postService.getPostId(ID), HttpStatus.OK);
+    }
+    @GetMapping("/api/post/moderation")
+    @PreAuthorize("hasAuthority('user:moderate')")
+    public ResponseEntity moderation(Principal principal,
+                                     @RequestParam(name = "offset", defaultValue = "0") int offset,
+                                     @RequestParam(name = "limit", defaultValue = "10") int limit,
+                                     @RequestParam(name = "status") String status)
+    {
+        return new ResponseEntity(postService.getModeration(principal,offset,limit,status),HttpStatus.OK);
+    }
+    @GetMapping("/api/post/my")
+    @PreAuthorize("hasAuthority('user:write')")
+    public ResponseEntity my(Principal principal,
+                                     @RequestParam(name = "offset", defaultValue = "0") int offset,
+                                     @RequestParam(name = "limit", defaultValue = "10") int limit,
+                                     @RequestParam(name = "status") String status)
+    {
+        return new ResponseEntity(postService.getMy(principal,offset,limit,status),HttpStatus.OK);
     }
 }

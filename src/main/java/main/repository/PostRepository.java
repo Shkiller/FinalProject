@@ -18,4 +18,10 @@ public interface PostRepository extends CrudRepository<Post, Integer> {
             "GROUP BY p.id "
     )
     List<Post> findPosts();
+
+    @Query("SELECT p " +
+            "FROM Post p " +
+            "WHERE p.moderationStatus = 'NEW'"
+    )
+    List<Post> findPostsByModerationStatus();
 }

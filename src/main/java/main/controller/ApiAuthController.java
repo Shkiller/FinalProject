@@ -8,6 +8,7 @@ import main.service.LoginService;
 import main.service.RegisterService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -28,7 +29,12 @@ public class ApiAuthController {
         this.captchaService = captchaService;
         this.registerService = registerService;
     }
-
+    @GetMapping("/logout")
+    @PreAuthorize("hasAuthority('user:write')")
+    public ResponseEntity logout()
+    {
+        return new ResponseEntity(loginService.logout(),HttpStatus.OK);
+    }
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody LoginRequest loginRequest) {
         return new ResponseEntity(loginService.login(loginRequest), HttpStatus.OK);

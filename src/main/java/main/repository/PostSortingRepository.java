@@ -53,4 +53,6 @@ public interface PostSortingRepository extends PagingAndSortingRepository<Post, 
             "ORDER BY p.time"
     )
     Page<Post> findPostsOrderByEarlyTime(Pageable pageable);
+
+
 }

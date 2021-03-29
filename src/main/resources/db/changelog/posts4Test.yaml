@@ -326,13 +326,13 @@ databaseChangeLog:
               - column:
                   name: is_active
                   type: BIT(1)
-                  valueBoolean: "false"
+                  valueBoolean: "true"
               - column:
                   name: moderation_status
-                  value: "new"
+                  value: "DECLINED"
               - column:
                   name: moderator_id
-                  value: null
+                  value: 1
               - column:
                   name: user_id
                   value: 2
@@ -354,10 +354,10 @@ databaseChangeLog:
               - column:
                   name: is_active
                   type: BIT(1)
-                  valueBoolean: "false"
+                  valueBoolean: "true"
               - column:
                   name: moderation_status
-                  value: "new"
+                  value: "NEW"
               - column:
                   name: moderator_id
                   value: null

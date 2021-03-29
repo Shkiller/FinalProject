@@ -1,10 +1,9 @@
 package main.api.response;
 
-public class CheckResponse {
-    
+public class LogoutResponse {
     private boolean result;
 
-    public boolean isResult() {
+    public boolean getResult() {
         return result;
     }
 
