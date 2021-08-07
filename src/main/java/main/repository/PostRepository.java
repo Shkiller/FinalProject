@@ -5,7 +5,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface PostRepository extends CrudRepository<Post, Integer> {
@@ -24,4 +27,29 @@ public interface PostRepository extends CrudRepository<Post, Integer> {
             "WHERE p.moderationStatus = 'NEW'"
     )
     List<Post> findPostsByModerationStatus();
+
+    @Query("SELECT SUM(viewCount) " +
+            "FROM Post " +
+            "WHERE user.id = ?1 " +
+            "GROUP BY user ")
+    Optional<Integer> findViewsCountByUser(int id);
+    @Query("SELECT COUNT(*) " +
+            "FROM Post " +
+            "WHERE user.id = ?1 " +
+            "GROUP BY user ")
+    Optional<Integer> findPostCountByUser(int id);
+    @Query("SELECT MIN(time) " +
+            "FROM Post " +
+            "WHERE user.id = ?1 " +
+            "GROUP BY user ")
+    Optional<Date> findLatestPostByUser(int id);
+    @Query("SELECT SUM(viewCount) " +
+            "FROM Post ")
+    Optional<Integer> findViewsCount();
+    @Query("SELECT COUNT(*) " +
+            "FROM Post ")
+    Optional<Integer> findPostCount();
+    @Query("SELECT MIN(time) " +
+            "FROM Post ")
+    Optional<Date> findLatestPost();
 }

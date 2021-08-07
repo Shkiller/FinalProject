@@ -7,6 +7,9 @@ spring.jpa.show-sql: true
 spring.jpa.properties.hibernate.dialect: org.hibernate.dialect.MySQL8Dialect
 #spring.liquibase.enabled: false
 
+#spring.servlet.multipart.max-file-size: 1024KB
+#spring.servlet.multipart.max-request-size: 1024KB
+
 blog.title: DevPub
 blog.subtitle: Рассказы разработчиков
 blog.phone: +7 903 666-44-55

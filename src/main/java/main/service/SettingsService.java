@@ -1,5 +1,6 @@
 package main.service;
 
+import main.api.request.SettingsRequest;
 import main.api.response.SettingsResponse;
 import main.model.GlobalSetting;
 import main.repository.SettingsRepository;
@@ -18,7 +19,7 @@ public class SettingsService {
         this.settingsRepository = settingsRepository;
     }
 
-    public ResponseEntity getGlobalSettings() {
+    public ResponseEntity<SettingsResponse> getGlobalSettings() {
         SettingsResponse settingsResponse = new SettingsResponse();
         settingsRepository.findAll().forEach(gS -> {
             switch (gS.getId()) {
@@ -33,6 +34,26 @@ public class SettingsService {
                     break;
             }
         });
-        return new ResponseEntity(settingsResponse, HttpStatus.OK);
+        return new ResponseEntity<>(settingsResponse, HttpStatus.OK);
+    }
+
+    public void putGlobalSettings(SettingsRequest settingsRequest) {
+        settingsRepository.findAll().forEach(gS -> {
+            switch (gS.getId()) {
+                case MULTIUSER_MODE:
+                    gS.setValue(settingsRequest.isMultiuserMode() ? "YES" : "NO");
+                    settingsRepository.save(gS);
+                    break;
+                case POST_PREMODERATION:
+                    gS.setValue(settingsRequest.isPostPremoderation() ? "YES" : "NO");
+                    settingsRepository.save(gS);
+                    break;
+
+                case STATISTICS_IS_PUBLIC:
+                    gS.setValue(settingsRequest.isStatisticsIsPublic() ? "YES" : "NO");
+                    settingsRepository.save(gS);
+                    break;
+            }
+        });
     }
 }
