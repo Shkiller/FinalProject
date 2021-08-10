@@ -21,4 +21,4 @@ blog.copyrightFrom: 2005
 captcha.deleteTime: 3600000
 
 
-password.url: http://localhost:8080/login/change-password/
+password.url: https://lyashko-java-skillbox.herokuapp.com/login/change-password/
