@@ -8,6 +8,7 @@ import main.model.CaptchaCode;
 import main.model.User;
 import main.repository.CaptchaRepository;
 import main.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -30,8 +31,9 @@ public class PasswordService {
 
     private final int PASS_LENGTH = 6;
     private final int LENGTH = 16;
-    public static final String PATH_TO_PROPERTIES = "src/main/resources/application.yml";
-    private final String URL = "http://localhost:8080/login/change-password/";
+    //public static final String PATH_TO_PROPERTIES = "src/main/resources/application.yml";
+    @Value("${password.url}")
+    private String URL;
     private final String SYMBOLS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
             + "0123456789"
             + "abcdefghijklmnopqrstuvxyz";
@@ -57,8 +59,7 @@ public class PasswordService {
             simpleMail.setFrom("senderEmailDev1@gmail.com");
             simpleMail.setTo(restoreRequest.getEmail());
             simpleMail.setSubject("Restore password");
-            String url = getURL();
-            simpleMail.setText(url + sb);
+            simpleMail.setText(URL + sb);
             user.setCode(sb.toString());
             userRepository.save(user);
             sender.send(simpleMail);
@@ -81,7 +82,7 @@ public class PasswordService {
         if (currentUser.isEmpty()) {
             errors.put("code", "Ссылка для восстановления пароля устарела.\n" +
                     "<a href= \n" +
-                    "\""+getURL()+"\">Запросить ссылку снова</a>");
+                    "\""+URL+"\">Запросить ссылку снова</a>");
         }
         if (!captchaCode.getCode().equals(passwordRequest.getCaptcha())) {
             errors.put("captcha", "Код с картинки введён неверно");
@@ -104,12 +105,12 @@ public class PasswordService {
             return resultErrorsResponse;
         }
     }
-    private String getURL() throws IOException {
-        FileInputStream fileInputStream;
-        Properties prop = new Properties();
-        fileInputStream = new FileInputStream(PATH_TO_PROPERTIES);
-        prop.load(fileInputStream);
-        String url = prop.getProperty("password.url");
-        return url;
-    }
+//    private String getURL() throws IOException {
+//        FileInputStream fileInputStream;
+//        Properties prop = new Properties();
+//        fileInputStream = new FileInputStream(PATH_TO_PROPERTIES);
+//        prop.load(fileInputStream);
+//        String url = prop.getProperty("password.url");
+//        return url;
+//    }
 }
