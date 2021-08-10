@@ -54,7 +54,7 @@ public class StorageService {
         Files.createDirectories(Path.of(path));
         path = path + "/" + sb.substring(12, 16)
                 + image.getOriginalFilename().substring(image.getOriginalFilename().lastIndexOf('.'));
-        path = STORAGE_PATH + path;
+        //path = STORAGE_PATH + path;
         Files.createFile(Path.of(path));
         image.transferTo(Paths.get(path));
         return path;
@@ -71,7 +71,7 @@ public class StorageService {
         Files.createDirectories(Path.of(path));
         path = path + "/" + sb.substring(12, 16)
                 + image.getOriginalFilename().substring(image.getOriginalFilename().lastIndexOf('.'));
-        path = STORAGE_PATH + path;
+        //path = STORAGE_PATH + path;
         Files.createFile(Path.of(path));
         File outputFile = new File(path);
         ImageIO.write(cropImage(image.getInputStream()), "jpg", outputFile);
