@@ -68,12 +68,12 @@ public class ApiAuthController {
         return new ResponseEntity<>(registerService.register(request), HttpStatus.OK);
     }
     @PostMapping("/restore")
-    public ResponseEntity<ResultResponse> restore(@RequestBody RestoreRequest request) {
+    public ResponseEntity<ResultResponse> restore(@RequestBody RestoreRequest request) throws IOException {
 
         return new ResponseEntity<>(passwordService.restore(request), HttpStatus.OK);
     }
     @PostMapping("/password")
-    public ResponseEntity<ResultErrorsResponse> password(@RequestBody PasswordRequest request) {
+    public ResponseEntity<ResultErrorsResponse> password(@RequestBody PasswordRequest request) throws IOException {
 
         return new ResponseEntity<>(passwordService.password(request), HttpStatus.OK);
     }

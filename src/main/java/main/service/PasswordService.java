@@ -14,9 +14,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Properties;
 
 @Service
 public class PasswordService {
@@ -26,6 +30,7 @@ public class PasswordService {
 
     private final int PASS_LENGTH = 6;
     private final int LENGTH = 16;
+    public static final String PATH_TO_PROPERTIES = "src/main/resources/application.yml";
     private final String URL = "http://localhost:8080/login/change-password/";
     private final String SYMBOLS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
             + "0123456789"
@@ -37,7 +42,7 @@ public class PasswordService {
         this.captchaRepository = captchaRepository;
     }
 
-    public ResultResponse restore(RestoreRequest restoreRequest) {
+    public ResultResponse restore(RestoreRequest restoreRequest) throws IOException {
         Optional<User> currentUser = userRepository.findByEmail(restoreRequest.getEmail());
         if (currentUser.isEmpty()) {
             return new ResultResponse();
@@ -52,7 +57,8 @@ public class PasswordService {
             simpleMail.setFrom("senderEmailDev1@gmail.com");
             simpleMail.setTo(restoreRequest.getEmail());
             simpleMail.setSubject("Restore password");
-            simpleMail.setText(URL + sb);
+            String url = getURL();
+            simpleMail.setText(url + sb);
             user.setCode(sb.toString());
             userRepository.save(user);
             sender.send(simpleMail);
@@ -62,7 +68,9 @@ public class PasswordService {
         }
     }
 
-    public ResultErrorsResponse password(PasswordRequest passwordRequest) {
+
+
+    public ResultErrorsResponse password(PasswordRequest passwordRequest) throws IOException {
         Map<String, String> errors = new HashMap<>();
         Optional<User> currentUser = userRepository.findByCode(passwordRequest.getCode());
         CaptchaCode captchaCode = captchaRepository.findBySecretCode(passwordRequest.getCaptchaSecret());
@@ -73,7 +81,7 @@ public class PasswordService {
         if (currentUser.isEmpty()) {
             errors.put("code", "Ссылка для восстановления пароля устарела.\n" +
                     "<a href= \n" +
-                    "\"http://localhost:8080/login/restore-password\">Запросить ссылку снова</a>");
+                    "\""+getURL()+"\">Запросить ссылку снова</a>");
         }
         if (!captchaCode.getCode().equals(passwordRequest.getCaptcha())) {
             errors.put("captcha", "Код с картинки введён неверно");
@@ -95,5 +103,13 @@ public class PasswordService {
             resultErrorsResponse.setErrors(errors);
             return resultErrorsResponse;
         }
+    }
+    private String getURL() throws IOException {
+        FileInputStream fileInputStream;
+        Properties prop = new Properties();
+        fileInputStream = new FileInputStream(PATH_TO_PROPERTIES);
+        prop.load(fileInputStream);
+        String url = prop.getProperty("password.url");
+        return url;
     }
 }

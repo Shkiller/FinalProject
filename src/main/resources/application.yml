@@ -17,3 +17,6 @@ blog.email: mail@mail.ru
 blog.copyright: Дмитрий Сергеев
 blog.copyrightFrom: 2005
 captcha.deleteTime: 3600000
+
+
+password.url: http://localhost:8080/login/change-password/

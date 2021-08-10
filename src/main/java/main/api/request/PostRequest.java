@@ -1,10 +1,12 @@
 package main.api.request;
 
+import java.util.List;
+
 public class PostRequest {
     private long timestamp;
     private byte active;
     private String title;
-    private String[] tags;
+    private List<String> tags;
     private String text;
 
     public long getTimestamp() {
@@ -31,11 +33,11 @@ public class PostRequest {
         this.title = title;
     }
 
-    public String[] getTags() {
+    public List<String> getTags() {
         return tags;
     }
 
-    public void setTags(String[] tags) {
+    public void setTags(List<String> tags) {
         this.tags = tags;
     }
 

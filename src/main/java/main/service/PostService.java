@@ -6,6 +6,7 @@ import main.exception.EntityNotFoundException;
 import main.model.*;
 import main.repository.*;
 import org.jsoup.Jsoup;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
 import org.springframework.data.domain.Pageable;
@@ -14,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 import java.security.Principal;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 public class PostService {
@@ -59,22 +59,30 @@ public class PostService {
         PostsResponse postsResponse = new PostsResponse();
         Pageable pageable = PageRequest.of(offset / limit, limit);
         List<Post> postsList = new ArrayList<>();
+        Page<Post> pageablePostList;
         switch (mode) {
             case "recent":
-                postsList = postSortingRepository.findPostsOrderRecentTime(pageable).toList();
+                pageablePostList = postSortingRepository.findPostsOrderRecentTime(pageable);
+                postsList = pageablePostList.toList();
+                postsResponse.setCount((int) pageablePostList.getTotalElements());
                 break;
             case "popular":
-                postsList = postSortingRepository.findPostsOrderByComments(pageable).toList();
+                pageablePostList = postSortingRepository.findPostsOrderByComments(pageable);
+                postsList = pageablePostList.toList();
+                postsResponse.setCount((int) pageablePostList.getTotalElements());
                 break;
             case "best":
-                postsList = postSortingRepository.findPostsOrderByLikes(pageable).toList();
+                pageablePostList = postSortingRepository.findPostsOrderByLikes(pageable);
+                postsList = pageablePostList.toList();
+                postsResponse.setCount((int) pageablePostList.getTotalElements());
                 break;
             case "early":
-                postsList = postSortingRepository.findPostsOrderByEarlyTime(pageable).toList();
+                pageablePostList = postSortingRepository.findPostsOrderByEarlyTime(pageable);
+                postsList = pageablePostList.toList();
+                postsResponse.setCount((int) pageablePostList.getTotalElements());
                 break;
         }
         Post4PostResponse[] posts4PostResponse = getPost4PostResponse(postsList).toArray(new Post4PostResponse[0]);
-        postsResponse.setCount((int) postSortingRepository.findPostsOrderByLikes(pageable).getTotalElements());
         postsResponse.setPosts(posts4PostResponse);
         return postsResponse;
     }
@@ -83,12 +91,15 @@ public class PostService {
         PostsResponse postsResponse = new PostsResponse();
         Pageable pageable = PageRequest.of(offset / limit, limit);
         List<Post> postsList;
+        Page<Post> pageablePostList;
         if (query.trim().equals("")) {
-            postsList = postSortingRepository.findPostsOrderRecentTime(pageable).toList();
-            postsResponse.setCount((int) postSortingRepository.findPostsOrderRecentTime(pageable).getTotalElements());
+            pageablePostList = postSortingRepository.findPostsOrderRecentTime(pageable);
+            postsList = pageablePostList.toList();
+            postsResponse.setCount((int) pageablePostList.getTotalElements());
         } else {
-            postsResponse.setCount((int) postSearchRepository.findPostsByTextContaining(query, pageable).getTotalElements());
-            postsList = postSearchRepository.findPostsByTextContaining(query, pageable).toList();
+            pageablePostList = postSearchRepository.findPostsByTextContaining(query, pageable);
+            postsList = pageablePostList.toList();
+            postsResponse.setCount((int) pageablePostList.getTotalElements());
         }
         Post4PostResponse[] posts4PostResponse = getPost4PostResponse(postsList).toArray(new Post4PostResponse[0]);
         postsResponse.setPosts(posts4PostResponse);
@@ -100,8 +111,9 @@ public class PostService {
         PostsResponse postsResponse = new PostsResponse();
         Pageable pageable = PageRequest.of(offset / limit, limit);
         List<Post> postsList;
-        postsResponse.setCount((int) postSearchRepository.findPostsByDate(date, pageable).getTotalElements());
-        postsList = postSearchRepository.findPostsByDate(date, pageable).toList();
+        Page<Post> pageablePostList = postSearchRepository.findPostsByDate(date, pageable);
+        postsResponse.setCount((int) pageablePostList.getTotalElements());
+        postsList = pageablePostList.toList();
         Post4PostResponse[] posts4PostResponse = getPost4PostResponse(postsList).toArray(new Post4PostResponse[0]);
         postsResponse.setPosts(posts4PostResponse);
         return postsResponse;
@@ -111,8 +123,9 @@ public class PostService {
         PostsResponse postsResponse = new PostsResponse();
         Pageable pageable = PageRequest.of(offset / limit, limit);
         List<Post> postsList;
-        postsResponse.setCount((int) postSearchRepository.findPostsByTagName(tag, pageable).getTotalElements());
-        postsList = postSearchRepository.findPostsByTagName(tag, pageable).toList();
+        Page<Post> pageablePostList = postSearchRepository.findPostsByTagName(tag, pageable);
+        postsResponse.setCount((int) pageablePostList.getTotalElements());
+        postsList = pageablePostList.toList();
 
         Post4PostResponse[] posts4PostResponse = getPost4PostResponse(postsList).toArray(new Post4PostResponse[0]);
         postsResponse.setPosts(posts4PostResponse);
@@ -172,19 +185,22 @@ public class PostService {
         PostsResponse postsResponse = new PostsResponse();
         Pageable pageable = PageRequest.of(offset / limit, limit);
         List<Post> postsList = new ArrayList<>();
-
+        Page<Post> pageablePostList;
         switch (status) {
             case "new":
-                postsList = usersPostRepository.findPostsByModerationStatus(pageable).toList();
-                postsResponse.setCount((int) usersPostRepository.findPostsByModerationStatus(pageable).getTotalElements());
+                pageablePostList = usersPostRepository.findPostsByModerationStatus(pageable);
+                postsList = pageablePostList.toList();
+                postsResponse.setCount((int) pageablePostList.getTotalElements());
                 break;
             case "declined":
-                postsList = usersPostRepository.findPostsByModeratorDeclined(currentUser.getId(), pageable).toList();
-                postsResponse.setCount((int) usersPostRepository.findPostsByModeratorDeclined(currentUser.getId(), pageable).getTotalElements());
+                pageablePostList = usersPostRepository.findPostsByModeratorDeclined(currentUser.getId(), pageable);
+                postsList = pageablePostList.toList();
+                postsResponse.setCount((int) pageablePostList.getTotalElements());
                 break;
             case "accepted":
-                postsList = usersPostRepository.findPostsByModeratorAccepted(currentUser.getId(), pageable).toList();
-                postsResponse.setCount((int) usersPostRepository.findPostsByModeratorAccepted(currentUser.getId(), pageable).getTotalElements());
+                pageablePostList = usersPostRepository.findPostsByModeratorAccepted(currentUser.getId(), pageable);
+                postsList = pageablePostList.toList();
+                postsResponse.setCount((int) pageablePostList.getTotalElements());
                 break;
         }
 
@@ -199,23 +215,27 @@ public class PostService {
         PostsResponse postsResponse = new PostsResponse();
         Pageable pageable = PageRequest.of(offset / limit, limit);
         List<Post> postsList = new ArrayList<>();
-
+        Page<Post> pageablePostList;
         switch (status) {
             case "inactive":
-                postsList = usersPostRepository.findPostsByInactive(currentUser.getId(), pageable).toList();
-                postsResponse.setCount((int) usersPostRepository.findPostsByInactive(currentUser.getId(), pageable).getTotalElements());
+                pageablePostList = usersPostRepository.findPostsByInactive(currentUser.getId(), pageable);
+                postsList = pageablePostList.toList();
+                postsResponse.setCount((int) pageablePostList.getTotalElements());
                 break;
             case "pending":
-                postsList = usersPostRepository.findPostsByPending(currentUser.getId(), pageable).toList();
-                postsResponse.setCount((int) usersPostRepository.findPostsByPending(currentUser.getId(), pageable).getTotalElements());
+                pageablePostList = usersPostRepository.findPostsByPending(currentUser.getId(), pageable);
+                postsList = pageablePostList.toList();
+                postsResponse.setCount((int) pageablePostList.getTotalElements());
                 break;
             case "declined":
-                postsList = usersPostRepository.findPostsByDeclined(currentUser.getId(), pageable).toList();
-                postsResponse.setCount((int) usersPostRepository.findPostsByDeclined(currentUser.getId(), pageable).getTotalElements());
+                pageablePostList = usersPostRepository.findPostsByDeclined(currentUser.getId(), pageable);
+                postsList = pageablePostList.toList();
+                postsResponse.setCount((int) pageablePostList.getTotalElements());
                 break;
             case "published":
-                postsList = usersPostRepository.findPostsByAccepted(currentUser.getId(), pageable).toList();
-                postsResponse.setCount((int) usersPostRepository.findPostsByAccepted(currentUser.getId(), pageable).getTotalElements());
+                pageablePostList = usersPostRepository.findPostsByAccepted(currentUser.getId(), pageable);
+                postsList = pageablePostList.toList();
+                postsResponse.setCount((int) pageablePostList.getTotalElements());
                 break;
         }
 
@@ -282,12 +302,12 @@ public class PostService {
             post.setTitle(postRequest.getTitle());
             post.setIsActive(postRequest.getActive());
             if (post.getUser().getId() == currentUser.getId())
-                    post.setModerationStatus(settingsRepository.findById(POST_PREMODERATION).orElse(new GlobalSetting()).getValue()
-                            .equals("YES") ? ModerationStatusType.NEW : ModerationStatusType.ACCEPTED);
+                post.setModerationStatus(settingsRepository.findById(POST_PREMODERATION).orElse(new GlobalSetting()).getValue()
+                        .equals("YES") ? ModerationStatusType.NEW : ModerationStatusType.ACCEPTED);
             post.setText(postRequest.getText());
             post.setTime(new Date(postRequest.getTimestamp()));
             postRepository.save(post);
-            Set<String> newTagSet = Arrays.stream(postRequest.getTags()).collect(Collectors.toSet());
+            Set<String> newTagSet = new HashSet<>(postRequest.getTags());
             tag2PostRepository.findByPost(id).forEach(tag2Post -> {
                 if (newTagSet.contains(tag2Post.getTag().getName())) {
                     newTagSet.remove(tag2Post.getTag().getName());
