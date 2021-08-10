@@ -1,0 +1,1 @@
+web: java -jar target/FinalProject-1.0.jar
