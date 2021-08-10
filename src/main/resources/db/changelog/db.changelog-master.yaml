@@ -1,25 +1,25 @@
 databaseChangeLog:
- # - include:
- #     file: changelog.yaml
- #     relativeToChangelogFile: true
+  - include:
+      file: changelog.yaml
+      relativeToChangelogFile: true
   - include:
       file: globalSetting.yaml
       relativeToChangelogFile: true
   - include:
       file: users4Test.yaml
       relativeToChangelogFile: true
- # - include:
- #     file: posts4Test.yaml
- #     relativeToChangelogFile: true
+  - include:
+      file: posts4Test.yaml
+      relativeToChangelogFile: true
   - include:
       file: tag4Test.yaml
       relativeToChangelogFile: true
-  #- include:
- #     file: tag2Post4Test.yaml
-  #    relativeToChangelogFile: true
- # - include:
-  #    file: PostVote4Test.yaml
-  #    relativeToChangelogFile: true
- # - include:
-  #      file: postComment4Test.yaml
-  #      relativeToChangelogFile: true
+  - include:
+      file: tag2Post4Test.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: PostVote4Test.yaml
+      relativeToChangelogFile: true
+  - include:
+        file: postComment4Test.yaml
+        relativeToChangelogFile: true

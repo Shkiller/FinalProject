@@ -1,12 +1,13 @@
-spring.datasource.url: jdbc:mysql://b6b950b253bfe0:9d7f2243@eu-cdbr-west-01.cleardb.com/heroku_506b157a228d6ce?useUnicode=true&characterEncoding=utf-8&reconnect=true
+#spring.datasource.url: jdbc:mysql://b6b950b253bfe0:9d7f2243@eu-cdbr-west-01.cleardb.com/heroku_506b157a228d6ce?useUnicode=true&characterEncoding=utf-8&reconnect=true
 #spring.datasource.url: jdbc:mysql://localhost:3306/db_schema?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+spring.datasource.url: jdbc:mysql://lqxi8hh6159n7pos:c5epazzmxxiiec4v@c8u4r7fp8i8qaniw.chr7pe7iynqr.eu-west-1.rds.amazonaws.com:3306/fyzj7zrhu3tj1na6?useUnicode=true&characterEncoding=utf-8&reconnect=true
 spring.datasource.username: root
 spring.datasource.password: 1234qwer
 spring.jpa.hibernate.ddl-auto: none
 spring.jpa.show-sql: true
 
 spring.jpa.properties.hibernate.dialect: org.hibernate.dialect.MySQL8Dialect
-spring.liquibase.enabled: false
+#spring.liquibase.enabled: false
 
 #spring.servlet.multipart.max-file-size: 1024KB
 #spring.servlet.multipart.max-request-size: 1024KB
