@@ -14,24 +14,26 @@ import java.awt.image.BufferedImage;
 import java.awt.image.CropImageFilter;
 import java.awt.image.FilteredImageSource;
 import java.awt.image.ImageFilter;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-
+import java.util.Base64;
 
 
 @Service
 public class StorageService {
     private final int LENGTH = 16;
+    private final String BASE64 = "data:image/png;base64, ";
     private final String SYMBOLS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
             + "0123456789"
             + "abcdefghijklmnopqrstuvxyz";
     //Так как я под Виндой
     private final String STORAGE_PATH = "https://res.cloudinary.com/hoy3870lz/image";
-    private final String UPLOAD = "/upload/";
-    private final String AVATARS = "/avatars/";
+    private final String UPLOAD = "upload/";
+    private final String AVATARS = "avatars/";
     private final Cloudinary cloudinary;
 
     public StorageService() {
@@ -55,15 +57,10 @@ public class StorageService {
             throw new MaxUploadSizeExceededException(5242880);
         }
         String path = UPLOAD + sb.substring(0, 4) + "/" + sb.substring(4, 8) + "/" + sb.substring(8, 12);
-        //Files.createDirectories(Path.of(path));
-        path = path + "/" + sb.substring(12, 16)
-                + image.getOriginalFilename().substring(image.getOriginalFilename().lastIndexOf('.'));
-        //path = STORAGE_PATH + path;
-//        Files.createFile(Path.of(path));
-//        image.transferTo(Paths.get(path));
-        cloudinary.uploader().upload(image, ObjectUtils.asMap(
-                "public_id", path));
-        return path;
+        path = path + "/" + sb.substring(12, 16);
+
+        return cloudinary.uploader().upload(image.getBytes(), ObjectUtils.asMap(
+                "public_id", path)).get("url").toString();
     }
 
 
@@ -75,13 +72,12 @@ public class StorageService {
         }
         String path = AVATARS + sb.substring(0, 4) + "/" + sb.substring(4, 8) + "/" + sb.substring(8, 12);
         Files.createDirectories(Path.of(path));
-        path = path + "/" + sb.substring(12, 16)
-                + image.getOriginalFilename().substring(image.getOriginalFilename().lastIndexOf('.'));
-        //path = STORAGE_PATH + path;
-        Files.createFile(Path.of(path));
-        File outputFile = new File(path);
-        ImageIO.write(cropImage(image.getInputStream()), "jpg", outputFile);
-        return path;
+        path = path + "/" + sb.substring(12, 16);
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ImageIO.write(cropImage(image.getInputStream()), "jpg", baos);
+        return cloudinary.uploader().upload(baos.toByteArray(), ObjectUtils.asMap(
+                "public_id", path)).get("url").toString();
     }
 
     private BufferedImage cropImage(InputStream inputStream) throws IOException {

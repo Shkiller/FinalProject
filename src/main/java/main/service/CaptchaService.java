@@ -17,7 +17,7 @@ import java.util.Date;
 
 @Service
 public class CaptchaService {
-    private final String BASE64 = "data:image/png;base64, ";
+    private final String BASE64 = "data:image/png;base64,";
     @Value("${captcha.deleteTime}")
     private long hour;
     private final CaptchaRepository captchaRepository;
