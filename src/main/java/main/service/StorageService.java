@@ -55,7 +55,7 @@ public class StorageService {
             throw new MaxUploadSizeExceededException(5242880);
         }
         String path = UPLOAD + sb.substring(0, 4) + "/" + sb.substring(4, 8) + "/" + sb.substring(8, 12);
-        Files.createDirectories(Path.of(path));
+        //Files.createDirectories(Path.of(path));
         path = path + "/" + sb.substring(12, 16)
                 + image.getOriginalFilename().substring(image.getOriginalFilename().lastIndexOf('.'));
         //path = STORAGE_PATH + path;
