@@ -15,23 +15,18 @@ import java.awt.image.CropImageFilter;
 import java.awt.image.FilteredImageSource;
 import java.awt.image.ImageFilter;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Base64;
 
 
 @Service
 public class StorageService {
     private final int LENGTH = 16;
-    private final String BASE64 = "data:image/png;base64, ";
     private final String SYMBOLS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
             + "0123456789"
             + "abcdefghijklmnopqrstuvxyz";
-    //Так как я под Виндой
-    private final String STORAGE_PATH = "https://res.cloudinary.com/hoy3870lz/image";
     private final String UPLOAD = "upload/";
     private final String AVATARS = "avatars/";
     private final Cloudinary cloudinary;
