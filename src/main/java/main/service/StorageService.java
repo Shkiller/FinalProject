@@ -1,5 +1,7 @@
 package main.service;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import main.exception.IncorrectFormatException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
@@ -17,7 +19,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 
 
@@ -28,9 +29,17 @@ public class StorageService {
             + "0123456789"
             + "abcdefghijklmnopqrstuvxyz";
     //Так как я под Виндой
-    private final String STORAGE_PATH = "C:";
+    private final String STORAGE_PATH = "https://res.cloudinary.com/hoy3870lz/image";
     private final String UPLOAD = "/upload/";
     private final String AVATARS = "/avatars/";
+    private final Cloudinary cloudinary;
+
+    public StorageService() {
+        this.cloudinary = new Cloudinary(ObjectUtils.asMap(
+                "cloud_name", "hoy3870lz",
+                "api_key", "367436962736364",
+                "api_secret", "p9MsaZ3XdlXEmYxBDtjWmG2NWCA"));
+    }
 
     public String store(MultipartFile image) throws IOException, IncorrectFormatException {
         StringBuilder sb = new StringBuilder(LENGTH);
@@ -50,8 +59,10 @@ public class StorageService {
         path = path + "/" + sb.substring(12, 16)
                 + image.getOriginalFilename().substring(image.getOriginalFilename().lastIndexOf('.'));
         //path = STORAGE_PATH + path;
-        Files.createFile(Path.of(path));
-        image.transferTo(Paths.get(path));
+//        Files.createFile(Path.of(path));
+//        image.transferTo(Paths.get(path));
+        cloudinary.uploader().upload(image, ObjectUtils.asMap(
+                "public_id", path));
         return path;
     }
 
